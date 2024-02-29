@@ -15,6 +15,18 @@ android {
 
     }
 
+    def properties
+    def propertiesFile = rootProject.file('signing.properties')
+    if (propertiesFile.exists()) {
+        properties = new Properties()
+        properties.load(propertiesFile.newDataInputStream())
+    }
+    def getString = { String propertyName, String environmentName, String prompt ->
+        return properties?.get(propertyName) ?: System.getenv(environmentName) ?:
+            System.console()?.readLine('\n' + prompt + ': ')
+    }
+    def keyStoreFile = getString('storeFile', 'STORE_FILE', 'Store file')?.with(rootProject.&file)
+
     signingConfigs {
         release {
             if (keyStoreFile != null) {
