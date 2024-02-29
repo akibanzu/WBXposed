@@ -43,6 +43,11 @@ public class WeicoHook extends AbsHook {
             add("queryUveAdRequest$lambda$152");
             add("queryUveAdRequest$lambda$153");
         }});
+        put("6.3.3", new ArrayList<String>() {{
+            add("queryUveAdRequest$lambda$153");
+            add("queryUveAdRequest$lambda$154");
+            add("queryUveAdRequest$lambda$155");
+        }});
     }};
 
     @Override
