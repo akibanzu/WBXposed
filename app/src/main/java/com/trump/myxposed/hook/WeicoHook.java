@@ -103,7 +103,7 @@ public class WeicoHook extends AbsHook {
     private void removeTimeLineAd(ClassLoader classLoader) {
         try {
             //6.2.6以后queryUveAdRequest不变
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$151", java.util.Map.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$153", java.util.Map.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
@@ -114,7 +114,7 @@ public class WeicoHook extends AbsHook {
 
             Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
 
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$152", Function1, java.lang.Object.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$154", Function1, java.lang.Object.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
@@ -123,7 +123,7 @@ public class WeicoHook extends AbsHook {
             });
 
 
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$153", Function1, java.lang.Object.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$155", Function1, java.lang.Object.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
