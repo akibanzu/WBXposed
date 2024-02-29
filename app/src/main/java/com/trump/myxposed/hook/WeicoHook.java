@@ -69,7 +69,6 @@ public class WeicoHook extends AbsHook {
 
     private void removeSpalshAd(ClassLoader classLoader) {
         try {
-            });
 
             XposedHelpers.findAndHookMethod("com.weico.international.activity.LogoActivity", classLoader, "doWhatNext", new XC_MethodHook() {
                 @Override
