@@ -17,19 +17,16 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('D:\\Personnal\\wangyuan.jks')
-            storePassword "wangyuan"
-            keyAlias "wangyuan"
-            keyPassword "wangyuan"
+            if (keyStoreFile != null) {
+                storeFile keyStoreFile
+                storePassword getString('storePassword', 'STORE_PASSWORD', 'Store password')
+                keyAlias getString('keyAlias', 'KEY_ALIAS', 'Key alias')
+                keyPassword getString('keyPassword', 'KEY_PASSWORD', 'Key password')
+            }
         }
     }
 
     buildTypes {
-        debug {
-            minifyEnabled false
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
         release {
             minifyEnabled false
             signingConfig signingConfigs.release
