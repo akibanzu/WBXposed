@@ -3,10 +3,6 @@ package com.trump.myxposed;
 import android.content.SharedPreferences;
 
 import com.socks.library.KLog;
-import com.trump.myxposed.hook.MiuiAnalyticsHook;
-import com.trump.myxposed.hook.MiuiGuardHook;
-import com.trump.myxposed.hook.MiuiPersonalAssistantHook;
-import com.trump.myxposed.hook.VmosProHook;
 import com.trump.myxposed.hook.WeicoHook;
 import com.trump.myxposed.util.Utils;
 import com.trump.myxposed.util.XSpUtil;
@@ -30,22 +26,8 @@ public class XposedInit implements IXposedHookLoadPackage, IXposedHookZygoteInit
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         Utils.log("LoadPackage:" + lpparam.packageName);
         switch (lpparam.packageName) {
-            case Constant.PackageIds.wechat:
-                break;
             case Constant.PackageIds.weico:
                 new WeicoHook().handleLoadPackage(lpparam);
-                break;
-            case Constant.PackageIds.vmos:
-                new VmosProHook().handleLoadPackage(lpparam);
-                break;
-            case Constant.PackageIds.miui_guardprovider:
-                new MiuiGuardHook().handleLoadPackage(lpparam);
-                break;
-            case Constant.PackageIds.miui_analytics:
-                new MiuiAnalyticsHook().handleLoadPackage(lpparam);
-                break;
-            case Constant.PackageIds.miui_personalassistant:
-                new MiuiPersonalAssistantHook().handleLoadPackage(lpparam);
                 break;
         }
     }

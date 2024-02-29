@@ -26,19 +26,14 @@ import java.util.Set;
  * Functions :
  * 1.已登录用户直接跳转主界面
  * 2.后台转前台不跳新界面
- * 3.默认支持"6.2.6"以后版本
+ * 3.默认支持"6.3.3"以后版本
  */
 public class WeicoHook extends AbsHook {
 
     private ArrayList<String> currFunctionNames;
 
     private static HashMap<String, ArrayList<String>> currFunctionNamesMap = new HashMap<String, ArrayList<String>>() {{
-        put("6.1.7", new ArrayList<String>() {{
-            add("queryUveAdRequest$lambda$156");
-            add("queryUveAdRequest$lambda$157");
-            add("queryUveAdRequest$lambda$158");
-        }});
-        put("6.2.6", new ArrayList<String>() {{
+        put("6.3.3", new ArrayList<String>() {{
             add("queryUveAdRequest$lambda$153");
             add("queryUveAdRequest$lambda$154");
             add("queryUveAdRequest$lambda$155");
@@ -102,7 +97,7 @@ public class WeicoHook extends AbsHook {
 
     private void removeTimeLineAd(ClassLoader classLoader) {
         try {
-            //6.2.6以后queryUveAdRequest不变
+            //6.3.3
             XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$153", java.util.Map.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

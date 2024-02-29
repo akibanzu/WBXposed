@@ -47,20 +47,6 @@ public class MainActivity extends AppCompatActivity {
             if (!buttonView.isPressed()) return;
             XSpUtil.put(Constant.SpKey.hidePostBtn, isChecked);
         });
-
-        //阻止GuardProvider跟踪
-        mBinding.swFuckMiuiGuard.setChecked(XSpUtil.getBoolean(false, Constant.SpKey.swFuckMiuiGuard));
-        mBinding.swFuckMiuiGuard.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (!buttonView.isPressed()) return;
-            XSpUtil.put(Constant.SpKey.swFuckMiuiGuard, isChecked);
-        });
-
-        //暗黑模式
-        mBinding.swFuckMiuiAnalytics.setChecked(XSpUtil.getBoolean(false, Constant.SpKey.swFuckMiuiAnalytics));
-        mBinding.swFuckMiuiAnalytics.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (!buttonView.isPressed()) return;
-            XSpUtil.put(Constant.SpKey.swFuckMiuiAnalytics, isChecked);
-        });
     }
 
 }
