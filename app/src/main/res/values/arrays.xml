@@ -2,10 +2,5 @@
 <resources>
     <string-array name="xposed_scope">
         <item>com.weico.international</item>
-        <item>com.sina.weibolite</item>
-        <item>com.miui.analytics</item>
-        <item>com.miui.guardprovider</item>
-        <item>com.miui.personalassistant</item>
-        <item>com.vmos.pro</item>
     </string-array>
 </resources>

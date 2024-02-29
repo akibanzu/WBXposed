@@ -3,15 +3,7 @@ package com.trump.myxposed;
 public interface Constant {
 
     interface PackageIds {
-        String wechat = "com.tencent.mm";
         String weico = "com.weico.international"; //微博国际版
-        String vmos = "com.vmos.pro"; //vmos
-
-        String miui_guardprovider = "com.miui.guardprovider";
-
-        String miui_analytics = "com.miui.analytics";
-
-        String miui_personalassistant = "com.miui.personalassistant";
     }
 
     String SpFileName = "MyXposed";
@@ -21,10 +13,6 @@ public interface Constant {
     interface SpKey {
         String darkMode = "darkMode";
         String hidePostBtn = "hidePostBtn";
-
-        String swFuckMiuiGuard = "swFuckMiuiGuard";
-
-        String swFuckMiuiAnalytics = "swFuckMiuiAnalytics";
     }
 
     /**
