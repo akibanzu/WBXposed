@@ -40,7 +40,7 @@ jobs:
 
       - name: Build with Gradle
         shell: bash
-        run: ./gradlew assembleRelease
+        run: chmod +x ./gradlew && ./gradlew assembleRelease
 
       - name: Find APKs
         run: |
