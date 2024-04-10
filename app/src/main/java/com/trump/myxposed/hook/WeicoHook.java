@@ -47,8 +47,6 @@ public class WeicoHook extends AbsHook {
 
         removeSpalshAd(classLoader);
 
-        removeTimeLineAd(classLoader);
-
         boolean flagDarkMode = XSpUtil.getBoolean(true, Constant.SpKey.darkMode);
         log("weico hook flagDarkMode = " + flagDarkMode);
         if (flagDarkMode) {
@@ -60,6 +58,8 @@ public class WeicoHook extends AbsHook {
         if (hidePostBtn) {
             hideIndexPostBtn(classLoader);
         }
+
+        removeTimeLineAd(classLoader);
     }
 
     private void removeSpalshAd(ClassLoader classLoader) {
