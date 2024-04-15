@@ -1,17 +1,10 @@
 package com.trump.myxposed.hook;
 
-import android.app.Activity;
 import android.app.Application;
-import android.graphics.Color;
 import android.view.View;
 
 import com.trump.myxposed.Constant;
 import com.trump.myxposed.util.XSpUtil;
-
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
-import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -19,14 +12,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
+import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+
 /**
- * Author: LINMP4
- * Date:   2023/12/26 0011 10:35
  * Desc:   微博国际版
  * Functions :
- * 1.已登录用户直接跳转主界面
- * 2.后台转前台不跳新界面
- * 3.默认支持"6.3.3"以后版本
+ * 1.去除开屏广告
+ * 2.强制暗黑模式
+ * 3.去除时间线广告-支持6.1.7  6.2.6  6.3.8
  */
 public class WeicoHook extends AbsHook {
 
@@ -43,11 +39,13 @@ public class WeicoHook extends AbsHook {
     @Override
     void onHandleLoadPackage(String versionName, ClassLoader classLoader, XC_LoadPackage.LoadPackageParam lpparam) {
         currFunctionNames = currFunctionNamesMap.get(versionName);
+        if (currFunctionNames == null) {
+            //默认
+            currFunctionNames = currFunctionNamesMap.get("6.2.6");
+        }
         log("WeicoHook hook start version = " + versionName);
 
         removeSpalshAd(classLoader);
-
-        removeTimeLineAd(classLoader);
 
         boolean flagDarkMode = XSpUtil.getBoolean(true, Constant.SpKey.darkMode);
         log("weico hook flagDarkMode = " + flagDarkMode);
@@ -60,11 +58,12 @@ public class WeicoHook extends AbsHook {
         if (hidePostBtn) {
             hideIndexPostBtn(classLoader);
         }
+
+        removeTimeLineAd(classLoader);
     }
 
     private void removeSpalshAd(ClassLoader classLoader) {
         try {
-
             XposedHelpers.findAndHookMethod("com.weico.international.activity.LogoActivity", classLoader, "doWhatNext", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -97,8 +96,7 @@ public class WeicoHook extends AbsHook {
 
     private void removeTimeLineAd(ClassLoader classLoader) {
         try {
-            //6.3.3
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$159", java.util.Map.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(0), java.util.Map.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
@@ -109,7 +107,7 @@ public class WeicoHook extends AbsHook {
 
             Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
 
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$160", Function1, java.lang.Object.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(1), Function1, java.lang.Object.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
@@ -117,8 +115,7 @@ public class WeicoHook extends AbsHook {
                 }
             });
 
-
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, "queryUveAdRequest$lambda$161", Function1, java.lang.Object.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(2), Function1, java.lang.Object.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
