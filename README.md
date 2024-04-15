@@ -1,6 +1,6 @@
-# MyXposed
+# WBXposed
 
-个人自用的Xposed模块
+个人修改自用
 
 ## 微博轻享版
 
