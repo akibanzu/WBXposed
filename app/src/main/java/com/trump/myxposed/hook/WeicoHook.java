@@ -30,9 +30,9 @@ public class WeicoHook extends AbsHook {
 
     private static HashMap<String, ArrayList<String>> currFunctionNamesMap = new HashMap<String, ArrayList<String>>() {{
         put("6.3.7", new ArrayList<String>() {{
-            add("queryUveAdRequest$lambda$159");
-            add("queryUveAdRequest$lambda$160");
-            add("queryUveAdRequest$lambda$161");
+            add("queryUveAdRequest$lambda$163");
+            add("queryUveAdRequest$lambda$164");
+            add("queryUveAdRequest$lambda$165");
         }});
     }};
 
