@@ -29,7 +29,7 @@ public class WeicoHook extends AbsHook {
     private ArrayList<String> currFunctionNames;
 
     private static HashMap<String, ArrayList<String>> currFunctionNamesMap = new HashMap<String, ArrayList<String>>() {{
-        put("6.3.7", new ArrayList<String>() {{
+        put("6.4.4", new ArrayList<String>() {{
             add("queryUveAdRequest$lambda$163");
             add("queryUveAdRequest$lambda$164");
             add("queryUveAdRequest$lambda$165");
@@ -41,7 +41,7 @@ public class WeicoHook extends AbsHook {
         currFunctionNames = currFunctionNamesMap.get(versionName);
         if (currFunctionNames == null) {
             //默认
-            currFunctionNames = currFunctionNamesMap.get("6.2.6");
+            currFunctionNames = currFunctionNamesMap.get("6.4.4");
         }
         log("WeicoHook hook start version = " + versionName);
 
