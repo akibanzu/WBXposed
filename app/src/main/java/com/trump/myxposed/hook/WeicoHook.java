@@ -29,39 +29,52 @@ public class WeicoHook extends AbsHook {
     private ArrayList<String> currFunctionNames;
 
     private static HashMap<String, ArrayList<String>> currFunctionNamesMap = new HashMap<String, ArrayList<String>>() {{
-        put("6.1.7", new ArrayList<>() {{
-            add("queryUveAdRequest$lambda$156");
-            add("queryUveAdRequest$lambda$157");
-            add("queryUveAdRequest$lambda$158");
-        }});
-        put("6.2.6", new ArrayList<>() {{
+        put("151", new ArrayList<>() {{
             add("queryUveAdRequest$lambda$151");
             add("queryUveAdRequest$lambda$152");
             add("queryUveAdRequest$lambda$153");
         }});
-        put("6.3.8", new ArrayList<>() {{
+        put("156", new ArrayList<>() {{
+            add("queryUveAdRequest$lambda$156");
+            add("queryUveAdRequest$lambda$157");
+            add("queryUveAdRequest$lambda$158");
+        }});
+        put("159", new ArrayList<>() {{
             add("queryUveAdRequest$lambda$159");
             add("queryUveAdRequest$lambda$160");
             add("queryUveAdRequest$lambda$161");
         }});
-        put("6.4.4", new ArrayList<String>() {{
+        put("163", new ArrayList<String>() {{
             add("queryUveAdRequest$lambda$163");
             add("queryUveAdRequest$lambda$164");
             add("queryUveAdRequest$lambda$165");
         }});
-        put("6.4.5", new ArrayList<String>() {{
+        put("165", new ArrayList<String>() {{
             add("queryUveAdRequest$lambda$165");
             add("queryUveAdRequest$lambda$166");
             add("queryUveAdRequest$lambda$167");
+        }});
+        put("167", new ArrayList<String>() {{
+            add("queryUveAdRequest$lambda$167");
+            add("queryUveAdRequest$lambda$168");
+            add("queryUveAdRequest$lambda$169");
         }});
     }};
 
     @Override
     void onHandleLoadPackage(String versionName, ClassLoader classLoader, XC_LoadPackage.LoadPackageParam lpparam) {
-        currFunctionNames = currFunctionNamesMap.get(versionName);
-        if (currFunctionNames == null) {
-            //默认
-            currFunctionNames = currFunctionNamesMap.get("6.4.5");
+        if (versionName.compareTo("6.2.6") < 0) {
+            currFunctionNames = currFunctionNamesMap.get("156");
+        } else if (versionName.compareTo("6.3.8") < 0) {
+            currFunctionNames = currFunctionNamesMap.get("151");
+        } else if (versionName.compareTo("6.4.4") < 0) {
+            currFunctionNames = currFunctionNamesMap.get("159");
+        } else if (versionName.compareTo("6.4.5") < 0) {
+            currFunctionNames = currFunctionNamesMap.get("163");
+        } else if (versionName.compareTo("6.4.8") < 0) {
+            currFunctionNames = currFunctionNamesMap.get("165");
+        } else {
+            currFunctionNames = currFunctionNamesMap.get("167");
         }
         log("WeicoHook hook start version = " + versionName);
 
