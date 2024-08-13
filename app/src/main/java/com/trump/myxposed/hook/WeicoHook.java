@@ -49,6 +49,11 @@ public class WeicoHook extends AbsHook {
             add("queryUveAdRequest$lambda$164");
             add("queryUveAdRequest$lambda$165");
         }});
+        put("164", new ArrayList<String>() {{
+            add("queryUveAdRequest$lambda$164");
+            add("queryUveAdRequest$lambda$165");
+            add("queryUveAdRequest$lambda$166");
+        }});
         put("165", new ArrayList<String>() {{
             add("queryUveAdRequest$lambda$165");
             add("queryUveAdRequest$lambda$166");
@@ -73,8 +78,10 @@ public class WeicoHook extends AbsHook {
             currFunctionNames = currFunctionNamesMap.get("163");
         } else if (versionName.compareTo("6.4.8") < 0) {
             currFunctionNames = currFunctionNamesMap.get("165");
-        } else {
+        } else if (versionName.compareTo("6.5.0") < 0) {
             currFunctionNames = currFunctionNamesMap.get("167");
+        } else {
+            currFunctionNames = currFunctionNamesMap.get("164");
         }
         log("WeicoHook hook start version = " + versionName);
 
