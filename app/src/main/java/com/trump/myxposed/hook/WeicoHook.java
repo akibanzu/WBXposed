@@ -171,7 +171,7 @@ public class WeicoHook extends AbsHook {
             } else {
                 Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
                 
-                XposedHelpers.findAndHookMethod("com.weico.international.manager.uvead", classLoader, currFunctionNames.get(0), Function1, java.lang.Object.class, new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod("com.weico.international.manager.uvead.UveAdHelper", classLoader, currFunctionNames.get(0), Function1, java.lang.Object.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
