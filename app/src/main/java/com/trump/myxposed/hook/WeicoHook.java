@@ -29,6 +29,9 @@ public class WeicoHook extends AbsHook {
     private ArrayList<String> currFunctionNames;
 
     private static HashMap<String, ArrayList<String>> currFunctionNamesMap = new HashMap<String, ArrayList<String>>() {{
+        put("12", new ArrayList<>() {{
+            add("queryUveAdRequest$lambda$12");
+        }});
         put("151", new ArrayList<>() {{
             add("queryUveAdRequest$lambda$151");
             add("queryUveAdRequest$lambda$152");
@@ -80,8 +83,10 @@ public class WeicoHook extends AbsHook {
             currFunctionNames = currFunctionNamesMap.get("165");
         } else if (versionName.compareTo("6.5.0") < 0) {
             currFunctionNames = currFunctionNamesMap.get("167");
-        } else {
+        } else if (versionName.compareTo("6.5.8") < 0) {
             currFunctionNames = currFunctionNamesMap.get("164");
+        } else {
+            currFunctionNames = currFunctionNamesMap.get("12");
         }
         log("WeicoHook hook start version = " + versionName);
 
@@ -136,32 +141,44 @@ public class WeicoHook extends AbsHook {
 
     private void removeTimeLineAd(ClassLoader classLoader) {
         try {
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(0), java.util.Map.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    super.beforeHookedMethod(param);
-                    param.setResult("");
-                }
-            });
+            if (currFunctionNames.size() == 1) {
+                XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(0), java.util.Map.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        param.setResult("");
+                    }
+                });
 
 
-            Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
+                Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
 
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(1), Function1, java.lang.Object.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    super.beforeHookedMethod(param);
-                    param.setResult("");
-                }
-            });
+                XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(1), Function1, java.lang.Object.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        param.setResult("");
+                    }
+                });
 
-            XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(2), Function1, java.lang.Object.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    super.beforeHookedMethod(param);
-                    param.setResult(new ArrayList<>());
-                }
-            });
+                XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(2), Function1, java.lang.Object.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        param.setResult(new ArrayList<>());
+                    }
+                });
+            } else {
+                Class Function1 = XposedHelpers.findClass("kotlin.jvm.functions.Function1", classLoader);
+                
+                XposedHelpers.findAndHookMethod("com.weico.international.manager.uvead", classLoader, currFunctionNames.get(0), Function1, java.lang.Object.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        param.setResult(new ArrayList<>());
+                    }
+                });
+            }
 
 
             Class Status = XposedHelpers.findClass("com.weico.international.model.sina.Status", classLoader);
