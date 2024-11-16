@@ -141,7 +141,7 @@ public class WeicoHook extends AbsHook {
 
     private void removeTimeLineAd(ClassLoader classLoader) {
         try {
-            if (currFunctionNames.size() == 1) {
+            if (currFunctionNames.size() != 1) {
                 XposedHelpers.findAndHookMethod("com.weico.international.api.RxApiKt", classLoader, currFunctionNames.get(0), java.util.Map.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
